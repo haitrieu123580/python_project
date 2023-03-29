@@ -1,0 +1,69 @@
+
+{% extends 'webApp/base.html' %}
+{% block content %}
+{% load static %}
+<div class="container">
+    <!-- *!lap_name -->
+    <h3>{{Name}}</h3>
+    <div class="product__info row">
+        
+        <div class="product__left">
+        
+            <div class="slider slider-for">
+                <img src="{%static 'img/product00_1.png'%}" alt="">
+                <img src="{%static 'img/product00_2.png'%}" alt="">
+                <img src="{%static 'img/product00_3.png'%}" alt="">
+                <img src="{%static 'img/product00_4.png'%}" alt="">
+                <img src="{%static 'img/product00_5.png'%}" alt="">
+            </div>
+            <div class="slider slider-nav">
+                <img src="{%static 'img/product00_1.png'%}" alt="">
+                <img src="{%static 'img/product00_2.png'%}" alt="">
+                <img src="{%static 'img/product00_3.png'%}" alt="">
+                <img src="{%static 'img/product00_4.png'%}" alt="">
+                <img src="{%static 'img/product00_5.png'%}" alt="">
+            </div>                  
+        </div>
+        <div class="product__right col">
+           <h3>Cấu hình đặc điểm</h3>
+           <div class="product__top">
+                <div class="flex-col">
+                    <span class="text--grey">Tên hãng</span>
+                    {% comment %} *? {% endcomment %}
+                    <h4>{{Brand}}</h4>
+                </div>
+                <div class="flex-col">
+                    <span>Màu</span>
+                    <h4>{{Color}}</h4>
+                </div>
+                <div class="flex-col">
+                    <span>Card đồ hoạ</span>
+                    <h4>{{Card}}</h4>
+                </div>
+                <div class="flex-col">
+                    <span>Ram</span>
+                    <h4>{{Ram}}</h4>
+                </div>
+                <div class="flex-col">
+                    <span>CPU</span>
+                    <h4>{{Card}}</h4>
+                </div>
+                <div class="flex-col">
+                    <span>Kích thước màn hình</span>
+                    <h4>{{Screen_type}}</h4>
+                </div>
+           </div>
+           
+           <div class="product__bottom row">
+                <h3 style="color:#fe3464">{{Price}} VND</h3>
+                {% comment %} *!insert lap_id  {% endcomment %}
+                <button type="button" style="background-color: #fe3464;" id="addItem-btn">
+                    <span style="color: #fff;">Thêm vào giỏ hàng</span>
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </button>
+           </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

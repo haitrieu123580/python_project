@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lap store</title>
+   
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <script type="module"src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script src="https://kit.fontawesome.com/682fa468d1.js" crossorigin="anonymous"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header__left row">
+            <div class="logo">
+                <img src="{%static 'img/logo-thinkpro.svg'%}" alt="">
+            </div>
+            <div class="search_box">
+                <!-- *!warning: post?get -->
+                <form action="#" method="get" class="border--grey">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" name="search_lap" id="search_lap" placeholder="Tên sản phẩm, hãng">
+                </form>
+            </div>
+        </div>
+        <div class="header__right row">
+            {% comment %} *!link to cart_id {% endcomment %}
+            <a class="cart_icon" href="../html/cart.html">
+                <i class="fa-solid fa-cart-shopping"></i>
+            </a>
+            <div class="user_icon">
+                <i class="fa-solid fa-user"></i>
+            </div>
+        </div>
+    </header>
+    
+    {% block content %}
+    {% endblock %}
+  
+</body>
+<script type="text/javascript"src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script src="{%static 'js/lap_detail.js'%}"></script>
+</html>
