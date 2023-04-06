@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if laptop_list %}
+<table class="table table-bordered table-striped">      
+    <!-- columns name -->
+    <thead>
+        <tr>
+          <th>Name</th>
+          <th>Brand</th>
+          <th>Graphic Card</th>
+          <th>Ram</th>
+          <th>CPU</th>
+          <th>Screen type</th>
+          <th>Price</th>
+          <th>
+             Actions
+          </th>
+        </tr>
+      </thead>
+      <tbody id="myTable">
+        {% for laptop in laptop_list %}
+        <tr>
+            <td>{{ laptop.name }}</td>
+            <td>{{ laptop.brand }}</td>
+            <td>{{ laptop.graphic_card }}</td>
+            <td>{{ laptop.ram }}</td>
+            <td>{{ laptop.cpu }}</td>
+            <td>{{ laptop.screen_type }}</td>
+            <td>{{ laptop.price }}</td>
+            <td>
+                <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
+                <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
+                <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+            </td>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+    <p>No laptops are available.</p>
+{% endif %}
+{% endblock %}
