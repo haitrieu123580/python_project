@@ -10,3 +10,6 @@ def lapList(request):
     lap_list = Laptop.objects.all()
     context = {'laptop_list': lap_list }
     return render(request, 'lapList.html', context)
+def delete(request):
+    # delete
+    lapList()
