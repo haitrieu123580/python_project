@@ -34,14 +34,14 @@ class Laptop(models.Model):
     ram = models.IntegerField()
     cpu = models.CharField(max_length=50)
     screen_type = models.CharField(max_length=50)
-    price = models.DecimalField(max_digits=8, decimal_places=2)
+    price = models.DecimalField(max_digits=20, decimal_places=2)
 
     def __str__(self):
         return self.name
 
 
 class Image(models.Model):
-    image = models.ImageField(upload_to='images/')
+    image = models.ImageField(null = True, blank = True)
     description = models.CharField(max_length=100, blank=True)
     laptop = models.ForeignKey(
         Laptop, on_delete=models.CASCADE, related_name='images')
@@ -50,7 +50,7 @@ class Image(models.Model):
         return f"Image {self.id}: {self.description}"
 
 
-class Card(models.Model):
+class Cart(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
@@ -60,7 +60,7 @@ class Card(models.Model):
 
 
 class CartItem(models.Model):
-    card = models.ForeignKey(Card, on_delete=models.CASCADE)
+    card = models.ForeignKey(Cart, on_delete=models.CASCADE)
     laptop = models.ForeignKey(Laptop, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
     price = models.DecimalField(max_digits=8, decimal_places=2)
