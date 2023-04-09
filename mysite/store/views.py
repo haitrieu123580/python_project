@@ -13,9 +13,6 @@ def lapList(request):
     context = {'laptop_list': lap_list }
     return render(request, 'lapList.html', context)
 
-
-
-
 def add_laptop(request):
     brands = Brand.objects.all()
 
@@ -71,3 +68,7 @@ def laptop_detail(request, laptop_id):
     laptop = get_object_or_404(Laptop, id=laptop_id)
     images = Image.objects.filter(laptop=laptop)
     return render(request, 'laptop_detail.html', {'laptop': laptop, 'images': images})
+def delete(request):
+    # delete
+    lapList()
+

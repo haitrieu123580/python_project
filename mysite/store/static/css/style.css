@@ -146,7 +146,7 @@ span {
 
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
-    color: #fff;
+    /* color: #fff; */
     /* background: #6d7fcc; */
 }
 
@@ -197,10 +197,16 @@ a.article:hover {
 }
 /* ---------------------------------------------------
     CUSTOME
+
 ----------------------------------------------------- */
 .btn-info{
     background-color:var(--color-cyan);
     border-color: var(--color-cyan);
+}
+.table-bordered>:not(caption)>*>* {
+    border-width: 0 1px;
+    vertical-align: middle;
+    text-align: center;
 }
 /* ---------------------------------------------------
     MEDIAQUERIES
