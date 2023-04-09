@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ laptop.name }}</h1>
+<p>Price: {{ laptop.price }}</p>
+<p>RAM: {{ laptop.ram }}</p>
+<p>Processor: {{ laptop.cpu }}</p>
+<p>Graphic card: {{ laptop.graphic_card }}</p>
+<p>Screen type: {{ laptop.screen_type }}</p>
+<p>Screen type: {{ laptop.brand }}</p>
+<h2>Images:</h2>
+{% for image in laptop.images.all %}
+  <img src= "{{ image.image.url }}" alt="{{ image.description }}">
+{% endfor %}
+
+{% endblock %}
