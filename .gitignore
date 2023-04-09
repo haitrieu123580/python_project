@@ -1,2 +1,4 @@
 myenv/
 FE/
+.vscode/settings.json
+mysite/db.sqlite3
