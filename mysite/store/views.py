@@ -17,30 +17,19 @@ def add_laptop(request):
     brands = Brand.objects.all()
 
     if request.method == 'POST':
-        name = request.POST['name']
-        brand_id = request.POST['brand']
-        graphic_card = request.POST['graphic_card']
-        ram = request.POST['ram']
-        cpu = request.POST['cpu']
-        screen_type = request.POST['screen_type']
-        price = request.POST['price']
-
-        brand = Brand.objects.get(pk=brand_id)
-
-        laptop = Laptop(
-            name=name,
-            brand=brand,
-            graphic_card=graphic_card,
-            ram=ram,
-            cpu=cpu,
-            screen_type=screen_type,
-            price=price
-        )
-
-        laptop.save()
-        return redirect('lapList')
+        form = LaptopForm(request.POST)
+        if form.is_valid():
+            laptop = form.save()
+            return redirect('lapList')
     else:
-        return render(request, 'add_laptop.html', {'brands': brands})
+        form = LaptopForm()
+    if form.errors:
+        errors = form.errors
+    else:
+        errors = None
+
+    return render(request, 'add_laptop.html', {'form': form, 'brands': brands, 'errors': errors})
+
 
 
 
@@ -54,6 +43,7 @@ def laptop_update(request, pk):
             return redirect('lapList')
     else:
         form = LaptopForm(instance=laptop)
+    
     return render(request, 'laptop_update.html', {'form': form})
     
 def delete_laptop(request, pk):

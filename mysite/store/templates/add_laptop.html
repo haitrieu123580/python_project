@@ -2,51 +2,53 @@
 
 {% block content %}
   <h2>Add Laptop</h2>
+  
   <form method="post">
     {% csrf_token %}
-    <table>
-      <tbody>
-        <tr>
-          <td>Name:</td>
-          <td><input type="text" name="name"></td>
-        </tr>
-        <tr>
-          <td>Brand:</td>
-          <td>
-            <select name="brand">
-              {% for brand in brands %}
-                <option value="{{ brand.id }}">{{ brand.name }}</option>
-              {% endfor %}
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td>Graphic Card:</td>
-          <td><input type="text" name="graphic_card"></td>
-        </tr>
-        <tr>
-          <td>Ram:</td>
-          <td><input type="text" name="ram"></td>
-        </tr>
-        <tr>
-          <td>CPU:</td>
-          <td><input type="text" name="cpu"></td>
-        </tr>
-        <tr>
-          <td>Screen Type:</td>
-          <td><input type="text" name="screen_type"></td>
-        </tr>
-        <tr>
-          <td>Price:</td>
-          <td><input type="text" name="price"></td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <button class = "btn btn-success" type="submit">Add</button>
-            <a class = "btn btn-danger" href="{% url 'lapList' %}">Cancel</a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" class="form-control" id="name" name="name">
+    </div>
+    <div class="form-group">
+      <label for="brand">Brand:</label>
+      <select class="form-control" id="brand" name="brand">
+        {% for brand in brands %}
+          <option value="{{ brand.id }}">{{ brand.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="graphic_card">Graphic Card:</label>
+      <input type="text" class="form-control" id="graphic_card" name="graphic_card">
+    </div>
+    <div class="form-group">
+      <label for="ram">Ram:</label>
+      <input type="text" class="form-control" id="ram" name="ram">
+    </div>
+    <div class="form-group">
+      <label for="cpu">CPU:</label>
+      <input type="text" class="form-control" id="cpu" name="cpu">
+    </div>
+    <div class="form-group">
+      <label for="screen_type">Screen Type:</label>
+      <input type="text" class="form-control" id="screen_type" name="screen_type">
+    </div>
+    <div class="form-group">
+      <label for="price">Price:</label>
+      <input type="text" class="form-control" id="price" name="price">
+    </div>
+    <div class="form-group">
+      <button class="btn btn-success" type="submit">Add</button>
+      <a class="btn btn-danger" href="{% url 'lapList' %}">Cancel</a>
+    </div>
   </form>
+  {% if errors %}
+    <ul>
+        {% for field_errors in errors.values %}
+            {% for error in field_errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        {% endfor %}
+    </ul>
+  {% endif %}
 {% endblock %}
