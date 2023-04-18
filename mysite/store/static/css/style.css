@@ -71,7 +71,7 @@ span {
 
 #sidebar.active {
     min-width: 80px;
-    /* max-width: 80px; */
+    max-width: 80px !important;
     text-align: center;
 }
 
@@ -200,8 +200,8 @@ a.article:hover {
 
 ----------------------------------------------------- */
 .btn-info{
-    background-color:var(--color-cyan);
-    border-color: var(--color-cyan);
+    background-color:var(--color-black) !important;
+    border-color: var(--color-black) !important;
 }
 .table-bordered>:not(caption)>*>* {
     border-width: 0 1px;
