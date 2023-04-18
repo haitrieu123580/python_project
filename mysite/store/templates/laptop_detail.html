@@ -1,16 +1,56 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>{{ laptop.name }}</h1>
-<p>Price: {{ laptop.price }}</p>
-<p>RAM: {{ laptop.ram }}</p>
-<p>Processor: {{ laptop.cpu }}</p>
-<p>Graphic card: {{ laptop.graphic_card }}</p>
-<p>Screen type: {{ laptop.screen_type }}</p>
-<p>Screen type: {{ laptop.brand }}</p>
-<h2>Images:</h2>
-{% for image in laptop.images.all %}
-  <img src= "{{ image.image.url }}" alt="{{ image.description }}">
-{% endfor %}
+
+<div class="container row product">
+  <!-- product images -->
+  <div class="col-6 product-image">
+
+      <div class="slider slider-for">
+      {% for image in laptop.images.all %}
+        <img src= "{{ image.image.url }}" alt="{{ image.description }}">
+      {% endfor %}
+      </div>
+      <div class="slider slider-nav">
+      {% for image in laptop.images.all %}
+        <img src= "{{ image.image.url }}" alt="{{ image.description }}">
+      {% endfor %}
+      </div>
+  </div>
+  <!-- product information -->
+  <div class="col-6 product-infor">
+      <h3>Cấu hình đặc điểm</h3>
+      <div class="product__top">
+          <div class="flex-col">
+              <span class="text--grey">Tên hãng</span>
+              <h4>{{ laptop.brand }}</h4>
+          </div>
+          <div class="flex-col">
+              <span>Tên laptop</span>
+              <h4>{{ laptop.name }}</h4>
+          </div>
+          <div class="flex-col">
+              <span>Card đồ hoạ</span>
+              <h4>{{ laptop.graphic_card }}</h4>
+          </div>
+          <div class="flex-col">
+              <span>Ram</span>
+              <h4>{{ laptop.ram }} GB</h4>
+          </div>
+          <div class="flex-col">
+              <span>CPU</span>
+              <h4>{{ laptop.cpu }}</h4>
+          </div>
+          <div class="flex-col">
+              <span>Kiểu màn hình</span>
+              <h4>{{ laptop.screen_type }}</h4>
+          </div>
+      </div>
+
+      <div class="product__bottom row">
+          <h3 style="color:#fe3464">{{ laptop.price }} VND</h3>
+      </div>
+  </div>
+</div>
 
 {% endblock %}
