@@ -10,5 +10,6 @@ urlpatterns = [
     path('laptop_update/<str:pk>/', views.laptop_update, name='laptop_update'),
     path('delete_laptop/<str:pk>/', views.delete_laptop, name='delete_laptop'),
     path('laptop_detail/<str:laptop_id>/', views.laptop_detail, name='laptop_detail'),
+    
 ]  
 # 
