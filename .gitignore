@@ -2,3 +2,5 @@ myenv/
 FE/
 .vscode/settings.json
 mysite/db.sqlite3
+__pycache__
+mysite/static/images
