@@ -6,8 +6,26 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Laptop
 from .forms import LaptopForm
 
+# def loginForm(request):
+#     return render(request, 'base.html', {})
+
+# def login(request):
+#     if request.method == 'POST':
+#         username = request.POST.get("username")
+#         password = request.POST.get("password")
+#         print(type (username), type (password))
+#         # test direct
+#         if username=='admin' and password=='123' :
+#            return render(request,'base.html',{})
+#         else:
+#             return render(request,'customer.html',{})
+        
+        
+#         # find user -> check role -> direct
+#     return render(request, 'login.html', {})
+
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'base.html')
 def lapList(request):
     lap_list = Laptop.objects.all()
     context = {'laptop_list': lap_list }
