@@ -51,14 +51,14 @@
                 <li>
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="fa-solid fa-person"></i>
-                        customers
+                        Users
                     </a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
                         <li>
-                            <a href="#">View</a>
+                            <a href="{% url 'users' %}">View</a>
                         </li>
                         <li>
-                            <a href="#">Add new Customers</a>
+                            <a href="{% url 'user_add' %}">Add new User</a>
                         </li>
 
                     </ul>

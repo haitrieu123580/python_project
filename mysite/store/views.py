@@ -2,9 +2,12 @@
 
 from django.http import HttpResponse
 from .models import Laptop, Brand, Image
+from account.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Laptop
-from .forms import LaptopForm, ImageForm
+from .forms import LaptopForm, ImageForm, UserForm
+from account.forms import SignUpForm
+
 from django.views.generic.edit import DeleteView, UpdateView
 from django.urls import reverse_lazy
 
@@ -23,25 +26,6 @@ class DeleteImageView(DeleteView):
     template_name = 'delete_image.html'
     success_url = reverse_lazy('view_images')
 
-
-
-# def loginForm(request):
-#     return render(request, 'base.html', {})
-
-# def login(request):
-#     if request.method == 'POST':
-#         username = request.POST.get("username")
-#         password = request.POST.get("password")
-#         print(type (username), type (password))
-#         # test direct
-#         if username=='admin' and password=='123' :
-#            return render(request,'base.html',{})
-#         else:
-#             return render(request,'customer.html',{})
-
-
-#         # find user -> check role -> direct
-#     return render(request, 'login.html', {})
 
 def index(request):
     return render(request, 'base.html')
@@ -124,4 +108,48 @@ def view_images(request):
         images.append(Image.objects.filter(laptop=laptop))
     return render(request, 'view_images.html', {'laptops': laptops, 'images': images})
 
+# CUSTOMER
+def users_list(request):
+    usersList =  User.objects.filter(is_customer = True)
+    return render(request, 'users_list.html',{'usersList':usersList })
+def user_detail(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    return render(request, 'user_detail.html', {'user': user})
+
+def user_update(request, pk):
+
+    user = get_object_or_404(User, id=pk)
+    if request.method == 'POST':
+        form = UserForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('users')
+    else:
+        initial_role = 'Customer' if user.is_customer else 'Admin'
+        form = UserForm(instance=user, initial={'role': initial_role})
+    return render(request, 'user_update.html', {'form': form})
+
+
+def user_delete(request, pk):
+    user = User.objects.get(id=pk)
+    if request.method == 'POST':
+        user.delete()
+        return redirect('users')
+    context = {'item': user}
+    return render(request, 'user_delete.html', context)
+
+def user_add(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            new_user = form.save()
+            return redirect('users')
+    else:
+        form = SignUpForm()
+    if form.errors:
+        errors = form.errors
+    else:
+        errors = None
+
+    return render(request, 'user_add.html', {'form': form, 'errors': errors})
 
