@@ -14,5 +14,11 @@ urlpatterns = [
     path('view_images/', views.view_images, name='view_images'),
     path('edit_image/<int:pk>/', views.EditImageView.as_view(), name='edit_image'),
     path('delete_image/<int:pk>/', views.DeleteImageView.as_view(), name='delete_image'),
+    # CUSTOMER
+    path('users/', views.users_list, name='users'),
+    path('user_detail/<str:user_id>/',views.user_detail, name='user_detail'),
+    path('user_update/<str:pk>/', views.user_update, name='user_update'),
+    path('user_delete/<str:pk>/', views.user_delete, name='user_delete'),
+    path('user_add/', views.user_add, name='user_add'),
 ]
 #

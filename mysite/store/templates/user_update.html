@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block content %}
+
+  {% comment %} <h1>Update User</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class = "btn btn-success" type="submit">Save</button>
+  </form>  {% endcomment %}
+
+  <section style="background-color: #eee;">
+      <form class="row justify-content-center" method="post">
+        {% csrf_token %}
+         <hr>
+        <div class="col-lg-8">
+          <div class="card mb-4">
+            <div class="card-body">
+            {% comment %} First name {% endcomment %}
+            <div class="form-group row">
+              <p class="col-sm-3 mb-0">First name</p>
+              <div class="col-sm-9">
+                <div class="text-muted mb-0">{{form.first_name}}</div>
+              </div>
+            </div>
+              <hr>
+            {% comment %} Last name {% endcomment %}
+            <div class="form-group row">
+              <p class="col-sm-3 mb-0">Last name</p>
+              <div class="col-sm-9">
+                <div class="text-muted mb-0">{{form.last_name}}</div>
+              </div>
+            </div>
+              <hr>
+            {% comment %} User name {% endcomment %}
+            <div class="form-group row">
+              <p class="col-sm-3 mb-0">User name</p>
+              <div class="col-sm-9">
+                <div class="text-muted mb-0">{{form.username}}</div>
+              </div>
+            </div>
+              <hr>
+
+            {% comment %} Email {% endcomment %}
+            <div class="form-group row">
+              <p class="col-sm-3 mb-0">Email</p>
+              <div class="col-sm-9">
+                <div class="text-muted mb-0">{{form.email}}</div>
+              </div>
+            </div>
+              <hr>
+            {% comment %} Role {% endcomment %}
+            <div class="form-group row">
+              <p class="col-sm-3 mb-0">Role</p>
+              <div class="col-sm-9">
+                <div class="text-muted mb-0">{{form.role}}</div>
+              </div>
+            </div>
+              <hr>
+            </div>
+          </div>
+         </div>
+
+         <div class="row justify-content-center mb-2">
+          <button class = "btn btn-success col-sm-2" type="submit">Save</button>
+         </div>
+      </form>
+    </div>
+  </section>
+
+{% endblock %}

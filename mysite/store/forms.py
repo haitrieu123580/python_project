@@ -1,6 +1,6 @@
 from django import forms
 from .models import Laptop, Image
-
+from account.models import User
 
 class LaptopForm(forms.ModelForm):
     class Meta:
@@ -27,4 +27,58 @@ class ImageForm(forms.ModelForm):
     class Meta:
         model = Image
         fields = ['description', 'image', 'laptop']
- 
+
+class UserForm(forms.ModelForm):
+    username = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control",
+            }
+        )
+    )
+    first_name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control ",
+            }
+        )
+    )
+    last_name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control"
+            }
+        )
+    )
+    email = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control"
+            }
+        )
+    )
+
+    ROLES= [
+    ('Customer', 'Customer'),
+    ('Admin', 'Admin'),
+    ]
+    role= forms.CharField(
+        # initial=self.cleaned_data.get('is_customer')
+        label='Role', 
+        widget=forms.RadioSelect(choices=ROLES),
+    )
+    class Meta:
+        model = User
+        fields = ('username', 'email','first_name','last_name', 'role')
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        if self.cleaned_data.get('role') == 'Admin':
+            user.is_superuser = True
+            user.is_customer = False
+        else:
+            user.is_superuser = False
+            user.is_customer = True
+
+        if commit:
+            user.save()
+        return user
