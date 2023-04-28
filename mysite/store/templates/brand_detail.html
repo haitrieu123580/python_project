@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container row product">
+  <div class="col-6 product-infor">
+      <div class="name_br">Brand {{ brand.name }}</div>
+          <div class="flex-col">
+              <span>Description: </span>
+              <div class="item">{{ brand.info }}</div>
+          </div>
+          <div class="flex-col">
+              <span>Headquarters:</span>
+              <div class="item">{{ brand.headquarters }}</div>
+          </div>
+          <div class="flex-col">
+              <span>Hotline:</span>
+              <div class="item">{{ brand.phone }}</div>
+          </div>
+          <div class="flex-col">
+              <span>Email:</span>
+              <div class="item">{{ brand.email }}</div>
+          </div>
+  </div>
+</div>
+<a href="{% url 'brand_list' %}" class="btn btn-secondary addmar">Back</a>
+{% endblock %}
