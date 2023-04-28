@@ -20,5 +20,11 @@ urlpatterns = [
     path('user_update/<str:pk>/', views.user_update, name='user_update'),
     path('user_delete/<str:pk>/', views.user_delete, name='user_delete'),
     path('user_add/', views.user_add, name='user_add'),
+    # Brand
+    path('brand_list/', views.brand_list, name='brand_list'),
+    path('brand_detail/<str:brand_id>/',views.brand_detail, name='brand_detail'),
+    path('brand_add/', views.brand_add, name='brand_add'),
+    path('brand_update/<str:brand_id>/', views.brand_update, name='brand_update'),
+    path('brand_delete/<str:brand_id>/', views.brand_delete, name='brand_delete'),
 ]
 #

@@ -1,6 +1,7 @@
 from django import forms
-from .models import Laptop, Image
+from .models import Laptop, Image, Brand
 from account.models import User
+import re
 
 class LaptopForm(forms.ModelForm):
     class Meta:
@@ -27,6 +28,19 @@ class ImageForm(forms.ModelForm):
     class Meta:
         model = Image
         fields = ['description', 'image', 'laptop']
+
+class BrandForm(forms.ModelForm):
+    class Meta:
+        model = Brand
+        fields = ['name', 'info', 'headquarters','phone', 'email']
+
+    def val_phone(self):
+        phone = self.cleaned_data.get('phone')
+        pattern = r'^\+?1?\d{9,15}$'
+        if not re.match(pattern, phone):
+            raise forms.ValidationError("Invalid phone number")
+        return phone
+
 
 class UserForm(forms.ModelForm):
     username = forms.CharField(

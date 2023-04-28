@@ -77,6 +77,21 @@
                         </li>
                     </ul>
                 </li>
+                <li class="active">
+                    <a href="#brandSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fa-solid fa-shop"></i>
+                        Brand
+                    </a>
+                    <ul class="collapse list-unstyled" id="brandSubmenu">
+                        <li>
+                            <a href="{% url 'brand_list' %}">View Brands</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'brand_add' %}">Add new brand</a>
+                        </li>
+                    </ul>
+                </li>
+
                 <li>
                     <a href="#">
                         <i class="fas fa-briefcase"></i>

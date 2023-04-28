@@ -5,7 +5,7 @@ from .models import Laptop, Brand, Image
 from account.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Laptop
-from .forms import LaptopForm, ImageForm, UserForm
+from .forms import LaptopForm, ImageForm, UserForm, BrandForm
 from account.forms import SignUpForm
 
 from django.views.generic.edit import DeleteView, UpdateView
@@ -153,3 +153,51 @@ def user_add(request):
 
     return render(request, 'user_add.html', {'form': form, 'errors': errors})
 
+# Brand
+def brand_list(request):
+    brand_list =  Brand.objects.all()
+    return render(request, 'brand_list.html',{'brand_list':brand_list })
+
+def brand_detail(request, brand_id):
+    brand = get_object_or_404(Brand, id=brand_id)
+    return render(request, 'brand_detail.html', {'brand': brand})
+
+def brand_add(request):
+    if request.method == 'POST':
+        form = BrandForm(request.POST)
+        if form.is_valid():
+            brand = form.save()
+            return redirect('brand_list')
+    else:
+        form = BrandForm()
+    if form.errors:
+        errors = form.errors
+    else:
+        errors = None
+
+    return render(request, 'brand_add.html', {'form': form, 'errors': errors})
+
+def brand_update(request, brand_id):
+
+    brand = get_object_or_404(Brand, id=brand_id)
+    if request.method == 'POST':
+        form = BrandForm(request.POST, instance=brand)
+        if form.is_valid():
+            form.save()
+            return redirect('brand_list')
+    else:
+        form = BrandForm(instance=brand)
+
+    return render(request, 'brand_update.html', {'form': form})
+
+def brand_delete(request, brand_id):
+    brand = Brand.objects.get(id=brand_id)
+    if request.method == 'POST':
+        brand.delete()
+        return redirect('brand_list')
+    context = {'brand_id': brand}
+    return render(request, 'brand_delete.html', context)
+
+def delete(request):
+    # delete
+    brand_list()
