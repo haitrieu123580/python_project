@@ -54,3 +54,26 @@
 .product__top div h4, .product__bottom h3{
     margin: 0;
 }
+.name_br{
+  margin-left: 100px;
+  font-weight: bold;
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+.item{
+  font-size: 20px;
+  margin-left: 110px;
+}
+.btn_back_detail{
+  color: rgb(249, 5, 5);
+  background-color: rgb(223, 219, 219);
+  font-weight: bold;
+  width: 40px; 
+  height: 500px;
+  margin-left: 80%;
+  font-size: 20px;
+  background-size: 50%;
+}
+.addmar{
+  margin-left: 70%;
+}

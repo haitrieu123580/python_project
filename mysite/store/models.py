@@ -22,6 +22,9 @@ class Customer(models.Model):
 class Brand(models.Model):
     name = models.CharField(max_length=50)
     info = models.TextField()
+    headquarters = models.CharField(max_length=50, default="USA")
+    phone = models.CharField(max_length=20, default="0000000000")
+    email = models.EmailField(max_length=50, default="abc@gmail.com")
 
     def __str__(self):
         return self.name
@@ -41,7 +44,7 @@ class Laptop(models.Model):
 
 
 class Image(models.Model):
-    image = models.ImageField(null = True, blank = True)
+    image = models.ImageField(null=True, blank=True)
     description = models.CharField(max_length=100, blank=True)
     laptop = models.ForeignKey(
         Laptop, on_delete=models.CASCADE, related_name='images')
