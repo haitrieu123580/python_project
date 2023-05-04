@@ -11,6 +11,9 @@ from account.forms import SignUpForm
 from django.views.generic.edit import DeleteView, UpdateView
 from django.urls import reverse_lazy
 
+from django.contrib.auth.decorators import login_required
+from account.views import login_view
+
 class EditImageView(UpdateView):
     model = Image
     form_class = ImageForm
@@ -27,16 +30,17 @@ class DeleteImageView(DeleteView):
     success_url = reverse_lazy('view_images')
 
 
+@login_required(login_url='login_view')
 def index(request):
     return render(request, 'base.html')
 
-
+@login_required(login_url='login_view')
 def lapList(request):
     lap_list = Laptop.objects.all()
     context = {'laptop_list': lap_list}
     return render(request, 'lapList.html', context)
 
-
+@login_required(login_url='login_view')
 def add_laptop(request):
     brands = Brand.objects.all()
 
@@ -54,7 +58,7 @@ def add_laptop(request):
 
     return render(request, 'add_laptop.html', {'form': form, 'brands': brands, 'errors': errors})
 
-
+@login_required(login_url='login_view')
 def laptop_update(request, pk):
 
     laptop = get_object_or_404(Laptop, id=pk)
@@ -68,7 +72,7 @@ def laptop_update(request, pk):
 
     return render(request, 'laptop_update.html', {'form': form})
 
-
+@login_required(login_url='login_view')
 def delete_laptop(request, pk):
     laptop = Laptop.objects.get(id=pk)
     if request.method == 'POST':
@@ -77,18 +81,18 @@ def delete_laptop(request, pk):
     context = {'item': laptop}
     return render(request, 'delete_laptop.html', context)
 
-
+@login_required(login_url='login_view')
 def laptop_detail(request, laptop_id):
     laptop = get_object_or_404(Laptop, id=laptop_id)
     images = Image.objects.filter(laptop=laptop)
     return render(request, 'laptop_detail.html', {'laptop': laptop, 'images': images})
 
-
+@login_required(login_url='login_view')
 def delete(request):
     # delete
     lapList()
 
-
+@login_required(login_url='login_view')
 def upload_image(request):
     if request.method == 'POST':
         form = ImageForm(request.POST, request.FILES)
@@ -100,7 +104,7 @@ def upload_image(request):
         laptops = Laptop.objects.all()
     return render(request, 'upload_image.html', {'form': form, 'laptops': laptops})
 
-
+@login_required(login_url='login_view')
 def view_images(request):
     laptops = Laptop.objects.all()
     images = []
@@ -109,13 +113,17 @@ def view_images(request):
     return render(request, 'view_images.html', {'laptops': laptops, 'images': images})
 
 # CUSTOMER
+@login_required(login_url='login_view')
 def users_list(request):
     usersList =  User.objects.filter(is_customer = True)
     return render(request, 'users_list.html',{'usersList':usersList })
+
+@login_required(login_url='login_view')
 def user_detail(request, user_id):
     user = get_object_or_404(User, id=user_id)
     return render(request, 'user_detail.html', {'user': user})
 
+@login_required(login_url='login_view')
 def user_update(request, pk):
 
     user = get_object_or_404(User, id=pk)
@@ -129,7 +137,7 @@ def user_update(request, pk):
         form = UserForm(instance=user, initial={'role': initial_role})
     return render(request, 'user_update.html', {'form': form})
 
-
+@login_required(login_url='login_view')
 def user_delete(request, pk):
     user = User.objects.get(id=pk)
     if request.method == 'POST':
@@ -138,6 +146,7 @@ def user_delete(request, pk):
     context = {'item': user}
     return render(request, 'user_delete.html', context)
 
+@login_required(login_url='login_view')
 def user_add(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -154,14 +163,17 @@ def user_add(request):
     return render(request, 'user_add.html', {'form': form, 'errors': errors})
 
 # Brand
+@login_required(login_url='login_view')
 def brand_list(request):
     brand_list =  Brand.objects.all()
     return render(request, 'brand_list.html',{'brand_list':brand_list })
 
+@login_required(login_url='login_view')
 def brand_detail(request, brand_id):
     brand = get_object_or_404(Brand, id=brand_id)
     return render(request, 'brand_detail.html', {'brand': brand})
 
+@login_required(login_url='login_view')
 def brand_add(request):
     if request.method == 'POST':
         form = BrandForm(request.POST)
@@ -177,6 +189,7 @@ def brand_add(request):
 
     return render(request, 'brand_add.html', {'form': form, 'errors': errors})
 
+@login_required(login_url='login_view')
 def brand_update(request, brand_id):
 
     brand = get_object_or_404(Brand, id=brand_id)
@@ -190,6 +203,7 @@ def brand_update(request, brand_id):
 
     return render(request, 'brand_update.html', {'form': form})
 
+@login_required(login_url='login_view')
 def brand_delete(request, brand_id):
     brand = Brand.objects.get(id=brand_id)
     if request.method == 'POST':
@@ -198,6 +212,7 @@ def brand_delete(request, brand_id):
     context = {'brand_id': brand}
     return render(request, 'brand_delete.html', context)
 
+@login_required(login_url='login_view')
 def delete(request):
     # delete
     brand_list()
