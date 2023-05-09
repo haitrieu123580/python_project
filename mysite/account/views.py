@@ -34,7 +34,7 @@ def login_view(request):
             if user is not None and user.is_customer:
                 login(request, user)
                 return render(request, 'customer.html',{})
-            elif user is not None and user.is_customer is not True:
+            elif user is not None and user.is_superuser is True:
                 login(request, user)
                 return redirect('store')
             else:
@@ -51,3 +51,10 @@ def admin(request):
 def customer(request):
     return render(request,'customer.html')
 
+from django.contrib.auth import logout
+
+def logout_view(request):
+    logout(request)
+    response = redirect('login_view')
+    response.delete_cookie('sessionid')
+    return response
