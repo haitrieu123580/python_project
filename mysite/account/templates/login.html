@@ -69,14 +69,14 @@
                                     {{ form.password }}
                                     <label class="form-label" for="form3Example4">Password</label>
                                 </div>
-                                 <!-- action -->
+                                 {% comment %} <!-- action -->
                                  <div class="d-flex mb-5 align-items-center">
                                     <label class="control control--checkbox mb-0"><span class="caption">Remember me</span>
                                       <input type="checkbox" checked="checked"/>
                                       <div class="control__indicator"></div>
                                     </label>
                                     <span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span>
-                                  </div>
+                                  </div> {% endcomment %}
                                    <!-- Submit button -->
                                 <button type="submit" class="btn btn-primary btn-block mb-4"
                                     style="background-color:palevioletred">
@@ -84,7 +84,7 @@
                                 </button>
 
                                 <!-- Register buttons -->
-                                <div class="text-center">
+                                {% comment %} <div class="text-center">
                                     <p>or sign in with:</p>
                                     <button type="button" class="btn btn-link btn-floating mx-1">
                                         <i class="fab fa-facebook-f"></i>
@@ -93,7 +93,7 @@
                                     <button type="button" class="btn btn-link btn-floating mx-1">
                                         <i class="fab fa-google" style="color:red"></i>
                                     </button>
-                                </div>
+                                </div> {% endcomment %}
                             </form>
                         </div>
                     </div>

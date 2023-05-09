@@ -1,10 +1,18 @@
 {% extends 'base.html' %}
-
+{% load static %}
+    
 {% block content %}
-  <h2>Add Laptop</h2>
-  
-  <form method="post">
+{% load static %}
+    
+<link rel="stylesheet" href="{% static "css/addForm.css" %}">
+
+<h2>Add Laptop</h2>
+<section style="background-color: #eee;">
+  <form method="post" >
     {% csrf_token %}
+  <div class= 'row justify-content-center'>
+  <div class="col-lg-8 card">
+    <div class="card-body">
     <div class="form-group">
       <label for="name">Name:</label>
       <input type="text" class="form-control" id="name" name="name">
@@ -37,11 +45,16 @@
       <label for="price">Price:</label>
       <input type="text" class="form-control" id="price" name="price">
     </div>
-    <div class="form-group">
-      <button class="btn btn-success" type="submit">Add</button>
-      <a class="btn btn-danger" href="{% url 'lapList' %}">Cancel</a>
+    <div class="form-group row justify-content-center mb-2">
+      <button class="btn btn-success col-sm-2" type="submit">Add</button>
+      <div class="col-sm-1"></div>
+      <a class="btn btn-danger col-sm-2" href="{% url 'lapList' %}">Cancel</a>
     </div>
+  </div>
+</div>
+</div>
   </form>
+</section>
   {% if errors %}
     <ul>
         {% for field_errors in errors.values %}
