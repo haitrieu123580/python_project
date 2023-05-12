@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+	<div class="row">
+		{% for laptop in laptops %}
+		<div class="col-lg-4">
+			{% comment %} <img src="{{ laptop.images.0.image.url }}" alt="{{ laptop.images.0.description }}"> {% endcomment %}
+			<img class="thumbnail" src="{% if laptop.images.all %}{{ laptop.images.all.0.image.url }}{% else %}{% static 'images/pat-hayden-yhym61XSVsI-unsplash.jpg' %}{% endif %}" alt="{{ laptop.name }}">
+			<div class="box-element product">
+				<h6><strong>{{ laptop.name }}</strong></h6>
+				<hr>
+
+				<a class="btn btn-outline-secondary add-btn update-cart" href ="{% url 'add_to_cart' laptop.id %}">Add to Cart</a>
+				
+				{% comment %} <a class="btn btn-outline-success" onclick="window.location.href='{% url 'product_detail' laptop.id %}'">View</a> {% endcomment %}
+				<h4 style="display: inline-block; float: right"><strong>${{ laptop.price }}</strong></h4>
+
+			</div>
+		</div>
+		{% endfor %}
+
+
+	</div>
+
+{% endblock content %}
