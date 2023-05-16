@@ -1,7 +1,7 @@
 
 
 from django.http import HttpResponse
-from .models import Laptop, Brand, Image
+from .models import Laptop, Brand, Image,Cart
 from account.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Laptop
@@ -97,12 +97,20 @@ def delete_laptop(request, pk):
 
 @login_required(login_url='login_view')
 def laptop_detail(request, laptop_id):
-    if not request.user.is_superuser:
-        return redirect('login_view')
-    else:
+    if request.user.is_superuser:
+        template = 'base.html'
         laptop = get_object_or_404(Laptop, id=laptop_id)
         images = Image.objects.filter(laptop=laptop)
-        return render(request, 'laptop_detail.html', {'laptop': laptop, 'images': images})
+        print(request.user.is_superuser)
+        return render(request, 'laptop_detail.html', {'laptop': laptop, 'images': images, 'template':template})
+    else:
+        template = 'main.html'
+        laptop = get_object_or_404(Laptop, id=laptop_id)
+        images = Image.objects.filter(laptop=laptop)
+        cart = Cart.objects.filter(customer=request.user).first()
+        return render(request, 'laptop_detail.html', {'laptop': laptop, 'images': images, 'template':template,"cart":cart})
+
+    
 
 @login_required(login_url='login_view')
 def delete(request):
