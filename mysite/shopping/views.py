@@ -25,6 +25,7 @@ def cart_details(request, cart_id):
         return redirect('login_view')
     else:
         cart = Cart.objects.get(customer=request.user)
+        # print(cart.total)
         cart_item = CartItem.objects.filter(cart = cart_id )
         context = {'cart':cart, 'cart_item':cart_item}
         # print(context)
@@ -55,6 +56,7 @@ def add_to_cart(request, laptop_id):
                 for item in cart_item:
                     total += item.price
                 cart.total = total
+                cart.save()
                 context = {'cart':cart, 'cart_item':cart_item}
                 return render(request, 'cart_details.html', context) 
             except CartItem.DoesNotExist:
