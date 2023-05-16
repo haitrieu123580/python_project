@@ -1,24 +1,5 @@
 from django.db import models
-
-
-class Account(models.Model):
-    username = models.CharField(max_length=50)
-    password = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.username
-
-
-class Customer(models.Model):
-    name = models.CharField(max_length=50)
-    phone = models.CharField(max_length=20)
-    email = models.EmailField(max_length=50)
-    account = models.ForeignKey(Account, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.name
-
-
+from account.models import User
 class Brand(models.Model):
     name = models.CharField(max_length=50)
     info = models.TextField()
@@ -54,7 +35,7 @@ class Image(models.Model):
 
 
 class Cart(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    customer = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
     # created_at: trường này là một trường kiểu ngày giờ (datetime field) được tạo tự động khi một bản ghi được tạo ra (auto_now_add).
@@ -63,7 +44,7 @@ class Cart(models.Model):
 
 
 class CartItem(models.Model):
-    card = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
     laptop = models.ForeignKey(Laptop, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
     price = models.DecimalField(max_digits=8, decimal_places=2)

@@ -33,7 +33,7 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None and user.is_customer:
                 login(request, user)
-                return render(request, 'customer.html',{})
+                return redirect('shopping')
             elif user is not None and user.is_superuser is True:
                 login(request, user)
                 return redirect('store')
