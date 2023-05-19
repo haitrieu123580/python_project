@@ -27,4 +27,5 @@ urlpatterns = [
     path('brand_update/<str:brand_id>/', views.brand_update, name='brand_update'),
     path('brand_delete/<str:brand_id>/', views.brand_delete, name='brand_delete'),
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 #
